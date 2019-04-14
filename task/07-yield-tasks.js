@@ -123,7 +123,18 @@ function* depthTraversalTree(root) { //1
  *
  */
 function* breadthTraversalTree(root) {
-    throw new Error('Not implemented');
+    let children = Array.from(root.children);
+    let nextChildren = [];
+    yield root;
+    while(children.length > 0) {
+        for (let i = 0; i < children.length; i++) {
+            let current = children[i];
+            if(current.children) nextChildren.push(...current.children);
+            yield current;
+        }
+        children = Array.from(nextChildren);
+        nextChildren = [];
+    }
 }
 
 
@@ -141,7 +152,21 @@ function* breadthTraversalTree(root) {
  *   [ 1, 3, 5, ... ], [ -1 ] => [ -1, 1, 3, 5, ...]
  */
 function* mergeSortedSequences(source1, source2) {
-    throw new Error('Not implemented');
+    const gen1 = source1();
+    const gen2 = source2();
+    let it1 = gen1.next();
+    let it2 = gen2.next();
+    while(true) {
+        if (it1.done || it1.value > it2.value) {
+            yield it2.value;
+            it2 = gen2.next();
+        } 
+        if (it2.done || it1.value < it2.value) {
+            yield it1.value;
+            it1 = gen1.next();
+        }
+    }
+    
 }
 
 
