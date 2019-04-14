@@ -96,8 +96,16 @@ function* getFibonacciSequence() {
  *  depthTraversalTree(node1) => node1, node2, node3, node4, node5, node6, node7, node8
  *
  */
-function* depthTraversalTree(root) { //1
-    throw new Error('Not implemented');
+function* depthTraversalTree(root) {
+    // throw new Error('Not implemented');
+    const nextRoots = [root];
+    while (nextRoots.length > 0) {
+        root = nextRoots.pop();
+        yield root;
+        if (root.children)
+            for (let value of root.children.reverse())
+                nextRoots.push(value);
+    }
 }
 
 
