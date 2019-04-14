@@ -32,8 +32,18 @@
  * @return {Iterable.<string>}
  *
  */
-function* get99BottlesOfBeer() {
-    throw new Error('Not implemented');
+function* get99BottlesOfBeer(bottles = 99) {
+    yield `${bottles} bottles of beer on the wall, ${bottles} bottles of beer.`
+    bottles--;
+    for (bottles; bottles > 1; bottles--) {
+        yield `Take one down and pass it around, ${bottles} bottles of beer on the wall.`
+        yield `${bottles} bottles of beer on the wall, ${bottles} bottles of beer.`
+    }
+    yield `Take one down and pass it around, 1 bottle of beer on the wall.`
+    yield `1 bottle of beer on the wall, 1 bottle of beer.`
+    yield `Take one down and pass it around, no more bottles of beer on the wall.`
+    yield `No more bottles of beer on the wall, no more bottles of beer.`
+    yield `Go to the store and buy some more, 99 bottles of beer on the wall.`
 }
 
 
@@ -47,7 +57,12 @@ function* get99BottlesOfBeer() {
  *
  */
 function* getFibonacciSequence() {
-    throw new Error('Not implemented');
+    let curr = 0;
+    let next = 1;
+    while (true) {
+        yield curr;
+        [curr, next] = [next, curr + next];
+    };
 }
 
 
@@ -81,7 +96,7 @@ function* getFibonacciSequence() {
  *  depthTraversalTree(node1) => node1, node2, node3, node4, node5, node6, node7, node8
  *
  */
-function* depthTraversalTree(root) {
+function* depthTraversalTree(root) { //1
     throw new Error('Not implemented');
 }
 
